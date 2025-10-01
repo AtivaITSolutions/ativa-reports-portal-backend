@@ -3,11 +3,16 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 require("./models");  // Ensure all models are registered
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ 
+  origin: process.env.PORTAL_BASE_URL || "http://localhost:5173", 
+  credentials: true 
+}));
+app.use(cookieParser());
 app.use(express.json());
 
 // Routes
